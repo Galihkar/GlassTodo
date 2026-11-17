@@ -46,8 +46,6 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--ac),var(--ac2));
 .sub{font-size:19px;color:var(--mut);max-width:620px;margin:0 auto 32px}
 .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .note{font-size:13px;color:var(--mut);margin-top:16px}
-.shot{margin:56px auto 0;max-width:760px;filter:drop-shadow(0 30px 50px rgba(40,60,140,.35));animation:float 6s ease-in-out infinite}
-.shot img{width:100%;display:block}
 @keyframes float{50%{transform:translateY(-10px)}}
 section{padding:80px 0}
 h2{font-size:clamp(30px,5vw,46px);letter-spacing:-1.2px;line-height:1.1;font-weight:800;text-align:center;margin-bottom:14px}
@@ -100,8 +98,8 @@ button.c:hover{transform:scale(1.07)}
 .c path{fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .38s cubic-bezier(.22,1,.36,1) .05s}
 .c.done path{stroke-dashoffset:0}
 .t{flex:1;min-width:0;height:40px;border-radius:12px;display:flex;align-items:center;gap:8px;padding:0 8px 0 14px;font-size:15px;color:#fff;background:linear-gradient(160deg,rgba(125,125,125,.7),rgba(95,95,95,.62));box-shadow:inset 0 1px 1px rgba(255,255,255,.28)}
-.t span{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;transition:opacity .3s}
-.t.done span{opacity:.6;text-decoration:line-through}
+.t>span:not(.chip){flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;transition:opacity .3s}
+.t.done>span:not(.chip){opacity:.6;text-decoration:line-through}
 .t input{width:100%;background:transparent;border:0;outline:0;color:#fff;font:inherit;user-select:text}
 .t input::placeholder{color:rgba(255,255,255,.6)}
 .x{flex:none;width:22px;height:22px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;background:#ff453a;opacity:0;transform:scale(.6);transition:opacity .18s,transform .22s var(--e)}
@@ -114,7 +112,46 @@ button.c:hover{transform:scale(1.07)}
 .dw{pointer-events:none}
 .t.hov .x{opacity:1;transform:none}
 .vis{margin-top:6px}
-@media(max-width:560px){.dw{flex-direction:column;align-items:stretch}.dleft{flex:none;flex-direction:row;gap:12px;justify-content:center}.dcount{font-size:44px}}
+
+section{scroll-margin-top:72px}
+.hero-stage{max-width:720px;margin:48px auto 0;padding:34px 22px}
+.fit{position:relative;margin:0 auto}
+.fit .dw{text-align:left;position:absolute;left:0;top:0;transform-origin:0 0;width:640px;height:304px;max-width:none;margin:0}
+.fit .dleft{flex:0 0 208px;position:relative;display:block}
+.dstack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .28s,transform .5s var(--e)}
+.dw.cal .dstack{opacity:0;transform:scale(.9)}
+.mcal{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:scale(.92);transition:opacity .25s,transform .5s var(--e)}
+.dw.cal .mcal{opacity:1;transform:none}
+.mhead{display:flex;align-items:center;gap:4px;height:30px;font-size:13px;font-weight:600}
+.mhead b{flex:1;white-space:nowrap}
+.mhead i{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.35);display:grid;place-items:center;font-style:normal;font-size:13px}
+.mwd,.mg{display:grid;grid-template-columns:repeat(7,28px);gap:2px}
+.mwd{height:16px;line-height:16px;font-size:10px;font-weight:600;opacity:.6;text-align:center}
+.mg{grid-auto-rows:30px}
+.md{position:relative;border-radius:10px;font-size:12px;font-weight:500;padding-top:4px;text-align:center;line-height:15px}
+.md.out{opacity:.38}
+.md.sel{background:linear-gradient(160deg,#4d94ff,#2f6fe0);color:#fff;box-shadow:0 4px 12px rgba(47,111,224,.45)}
+.dt{position:absolute;bottom:4px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;box-shadow:0 0 0 .75px rgba(0,0,0,.18)}
+.dt.r{background:#ff5f57}.dt.y{background:#febc2e}.dt.g{background:#28c840}
+.dt.bump{animation:pop .4s var(--e)}
+.t{position:relative}
+.t::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:20px;margin-top:-10px;border-radius:2px;background:transparent;transition:background .25s}
+.t.p1::before{background:#5ac8fa}.t.p2::before{background:#ff9f0a}.t.p3::before{background:#ff453a}
+.t.p1::before,.t.p2::before,.t.p3::before{animation:pop .4s var(--e)}
+.chip{flex:none;display:inline-flex;align-items:center;gap:5px;margin-left:4px;padding:2px 8px;border-radius:999px;font-size:11px;background:rgba(255,255,255,.2);color:#fff;white-space:nowrap}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.chip.pop-in{animation:pop .4s var(--e)}
+.r{position:relative}
+.r.lifted{z-index:6}
+.r.lifted .t,.r.lifted .c{box-shadow:0 14px 30px rgba(0,0,0,.38),inset 0 1px 1px rgba(255,255,255,.3)}
+.feats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.feats span{padding:7px 14px;border-radius:999px;background:var(--card);border:1px solid var(--bd);font-size:13px;font-weight:600;color:var(--mut);transition:transform .4s var(--e),background .25s,color .25s,box-shadow .25s}
+.feats span.on{background:linear-gradient(135deg,var(--ac),#6a5cff);color:#fff;transform:scale(1.08);box-shadow:0 8px 20px rgba(47,123,255,.35)}
+.cap{min-height:24px;font-size:15px}
+.dlgrid{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;margin-top:8px}
+.dlopt{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:270px}
+.dlopt small{color:var(--mut);font-size:13px;line-height:1.45}
+.final .note a{color:var(--ac)}
 </style>
 </head>
 <body>
@@ -125,7 +162,7 @@ button.c:hover{transform:scale(1.07)}
   <a class="l" href="#features" data-i="nav1">Keunggulan</a>
   <a class="l" href="#how" data-i="nav2">Cara kerja</a>
   <div class="lang"><button data-lang="id" class="on">ID</button><button data-lang="en">EN</button></div>
-  <a class="btn p sm dl" href="#" data-i="dl">Unduh</a>
+  <a class="btn p sm" href="#download" data-i="dl">Unduh</a>
 </nav></div></header>
 
 <main id="top">
@@ -134,33 +171,32 @@ button.c:hover{transform:scale(1.07)}
   <h1 data-i="h1">To-do list yang <em>tembus pandang</em>, secantik kaca.</h1>
   <p class="sub" data-i="sub">Widget desktop ringan dengan efek kaca blur ala iOS. Catat tugas harianmu, pilih tanggal, dan biarkan wallpaper tetap terlihat.</p>
   <div class="cta">
-    <a class="btn p dl" href="#dl2">⬇ Unduh untuk Windows</a>
+    <a class="btn p" href="#download" data-i="dl2">⬇ Unduh untuk Windows</a>
     <a class="btn g" href="#how" data-i="how">Lihat cara kerja</a>
   </div>
-  <p class="note" data-i="note">Pemasang (installer) tersedia di halaman Download.</p>
-  <div class="shot"><img data-shot="light" alt="Glass Todo"></div>
-</div>
-
-<section id="demo"><div class="wrap">
-  <h2 data-i="d_t">Animasi yang halus</h2>
-  <p class="lead" data-i="d_l">Centang memantul dan tergambar, baris meluncur keluar saat dihapus.</p>
-  <div class="stage"><div class="dw" id="dw" aria-hidden="true">
-    <div class="dleft"><div class="dcount" id="dc">0/0</div><div class="dlab">Task Done</div></div>
+  <div class="stage hero-stage"><div class="fit" id="fit"><div class="dw" id="dw" aria-hidden="true">
+    <div class="dleft">
+      <div class="dstack"><div class="dcount" id="dc">0/0</div><div class="dlab">Task Done</div></div>
+      <div class="mcal"><div class="mhead"><b id="mt"></b><i>‹</i><i>○</i><i>›</i></div><div class="mwd" id="mw"></div><div class="mg" id="mg"></div></div>
+    </div>
     <ul class="dlist" id="dlist"></ul>
-  </div></div>
-  <p class="note" id="cap" style="text-align:center;min-height:22px">&nbsp;</p>
-</div></section>
+  </div></div></div>
+  <div class="feats" id="feats"><span data-i="sc1">Tambah tugas</span><span data-i="sc2">Prioritas &amp; kategori</span><span data-i="sc3">Seret &amp; urutkan</span><span data-i="sc4">Kalender progres</span><span data-i="sc5">Centang</span><span data-i="sc6">Hapus</span></div>
+  <p class="note cap" id="cap">&nbsp;</p>
+</div>
 
 <section id="features"><div class="wrap">
   <h2 data-i="f_t">Kenapa Glass Todo?</h2>
   <p class="lead" data-i="f_l">Sederhana, cantik, dan tidak membebani komputer.</p>
   <div class="grid">
     <div class="card"><div class="ic">🪟</div><h3 data-i="f1t">Kaca blur transparan</h3><p data-i="f1d">Latar jendela memburamkan wallpaper di belakangnya, seperti widget iOS. Terbaik di Windows 11.</p></div>
-    <div class="card"><div class="ic">🪶</div><h3 data-i="f2t">Ringan</h3><p data-i="f2d">Memakai WebView2 bawaan Windows, bukan membawa browser sendiri, jadi file kecil dan hemat memori.</p></div>
+    <div class="card"><div class="ic">🪶</div><h3 data-i="f2t">Ringan</h3><p data-i="f2d">File installer yang kecil dan hemat memori ketika dijalankan: CPU &lt; 0.5% &amp; memori &lt; 5 MB.</p></div>
     <div class="card"><div class="ic">📅</div><h3 data-i="f3t">Daftar per tanggal</h3><p data-i="f3d">Geser hari atau pilih tanggal; setiap hari punya daftar tugasnya sendiri, lengkap dengan penghitung selesai.</p></div>
     <div class="card"><div class="ic">✨</div><h3 data-i="f4t">Animasi halus</h3><p data-i="f4d">Centang memantul, tugas baru meluncur masuk, dan tombol jendela ala macOS. Terasa hidup, tidak berlebihan.</p></div>
     <div class="card"><div class="ic">🔒</div><h3 data-i="f5t">Privat &amp; offline</h3><p data-i="f5d">Tanpa akun, tanpa internet. Semua tugas tersimpan hanya di komputermu.</p></div>
     <div class="card"><div class="ic">🌗</div><h3 data-i="f6t">Terang &amp; gelap otomatis</h3><p data-i="f6d">Warna menyesuaikan tema Windows, dan jendela bisa dipin agar selalu di atas aplikasi lain.</p></div>
+    <div class="card"><div class="ic">↕️</div><h3 data-i="f7t">Seret untuk mengurutkan</h3><p data-i="f7d">Susun ulang tugas dengan drag and drop yang mulus.</p></div>
+    <div class="card"><div class="ic">🏷️</div><h3 data-i="f8t">Kategori &amp; prioritas</h3><p data-i="f8d">Beri label kategori dan prioritas berwarna pada setiap tugas.</p></div>
   </div>
 </div></section>
 
@@ -189,14 +225,17 @@ button.c:hover{transform:scale(1.07)}
   </div>
 </div></section>
 
-<section id="dl2" class="final"><div class="wrap"><div class="card">
+<section class="final" id="download"><div class="wrap"><div class="card">
   <h2 data-i="c_t">Siap merapikan harimu?</h2>
   <p class="lead" data-i="c_l">Gratis, ringan, dan tanpa akun.</p>
-  <a class="btn p dl" href="https://github.com/Galihkar/glass-todo/releases/download/GlassTodov1.0.0/Glass-Todo.zip" data-i="dl2">⬇ Unduh untuk Windows</a>
+  <div class="dlgrid">
+    <div class="dlopt"><a class="btn p" id="dlSetup" href="https://github.com/Galihkar/glass-todo/releases/download/GlassTodov1.0.0/GlassTodo-v1.1.0_x64-setup.zip" data-i="dl_s">⬇ Unduh Installer</a><small data-i="ds_s">Pilih folder instalasi dan opsi jalan otomatis saat Windows menyala.</small></div>
+    <div class="dlopt"><a class="btn g" id="dlPortable" href="https://github.com/Galihkar/glass-todo/releases/download/GlassTodov1.0.0/glassTodo-v1.1.0_portable.zip" data-i="dl_p">⬇ Unduh Portable</a><small data-i="ds_p">Tanpa instalasi, langsung jalan. Cocok untuk flashdisk.</small></div>
+  </div>
 </div></div></section>
 </main>
 
-<footer><div class="wrap"><span data-i="foot">Dibuat oleh Galih dan tim.</span><a class="repo" href="#"></a>
+<footer><div class="wrap"><span data-i="foot">Made by Galih and the team @2026</span>
 <p class="vis" id="vis" hidden>👁 <b id="vc">–</b> <span data-i="vis">pengunjung</span></p></div></footer>
 
 <script>
@@ -204,6 +243,9 @@ button.c:hover{transform:scale(1.07)}
 var REPO = "USERNAME/REPO";
 // ==================================================================
 // ======= VISITOR COUNTER (GoatCounter, free): put your site code here, e.g. "glasstodo" for glasstodo.goatcounter.com =======
+// ======= File names of the two files you upload to the GitHub Release (rename them to exactly these names) =======
+var FILE_SETUP = "GlassTodo-Setup.exe";
+var FILE_PORTABLE = "GlassTodo-Portable.exe";
 var GC_CODE = "YOUR-CODE";
 // ======= Numbers shown in the "Lightweight" card. Check them in Task Manager, then edit if needed =======
 var STATS = {cpu:"< 0.5%", ram:"< 5 MB"};
@@ -213,11 +255,11 @@ var T = {
 id:{nav1:"Keunggulan",nav2:"Cara kerja",dl:"Unduh",dl2:"⬇ Unduh untuk Windows",pill:"Gratis · Windows 10 / 11",
  h1:"To-do list yang <em>tembus pandang</em>, secantik kaca.",
  sub:"Widget desktop ringan dengan efek kaca blur ala iOS. Catat tugas harianmu, pilih tanggal, dan biarkan wallpaper tetap terlihat.",
- how:"Lihat cara kerja",note:"Pemasang (installer) tersedia di halaman Download.",
- d_t:"Animasi yang halus",d_l:"Centang memantul dan tergambar, baris meluncur keluar saat dihapus.",a1:"Menambah tugas…",a2:"Mencentang tugas ✓",a3:"Menghapus tugas ✕",vis:"pengunjung",f_t:"Kenapa Glass Todo?",f_l:"Sederhana, cantik, dan tidak membebani komputer.",
+ how:"Lihat cara kerja",
+ d_t:"Animasi yang halus",d_l:"Centang memantul dan tergambar, baris meluncur keluar saat dihapus.",a1:"Menambah tugas…",a2:"Mencentang tugas ✓",a3:"Menghapus tugas ✕",vis:"pengunjung",sc1:"Tambah tugas",sc2:"Prioritas & kategori",sc3:"Seret & urutkan",sc4:"Kalender progres",sc5:"Centang",sc6:"Hapus",cp1:"Ketik tugas lalu Enter — baris baru meluncur masuk.",cp2:"Beri prioritas (garis warna) dan kategori (label) di tiap tugas.",cp3:"Tahan dan seret tugas untuk mengubah urutan.",cp4:"Buka kalender bulanan: titik di bawah tanggal menunjukkan progres hari itu.",cp5:"Centang tugas — titik berubah merah → kuning → hijau.",cp6:"Hapus tugas dengan animasi geser yang halus.",f_t:"Kenapa Glass Todo?",f_l:"Sederhana, cantik, dan tidak membebani komputer.",
  f1t:"Kaca blur transparan",f1d:"Latar jendela memburamkan wallpaper di belakangnya, seperti widget iOS. Terbaik di Windows 11.",
  f2t:"Ringan",f2d:"File installer yang kecil dan hemat memori ketika dijalankan: CPU {cpu} & memori {ram}.",
- f3t:"Daftar per tanggal",f3d:"Geser hari atau pilih tanggal; setiap hari punya daftar tugasnya sendiri, lengkap dengan penghitung selesai.",
+ f3t:"Kalender & progres",f3d:"Pilih tanggal di kalender bulanan; titik merah, kuning, atau hijau menunjukkan progres tiap hari.",f7t:"Seret untuk mengurutkan",f7d:"Susun ulang tugas dengan drag and drop yang mulus.",f8t:"Kategori & prioritas",f8d:"Beri label kategori dan prioritas berwarna pada setiap tugas.",
  f4t:"Animasi halus",f4d:"Centang memantul, tugas baru meluncur masuk, dan tombol jendela ala macOS. Terasa hidup, tidak berlebihan.",
  f5t:"Privat & offline",f5d:"Tanpa akun, tanpa internet. Semua tugas tersimpan hanya di komputermu.",
  f6t:"Terang & gelap otomatis",f6d:"Warna menyesuaikan tema Windows, dan jendela bisa dipin agar selalu di atas aplikasi lain.",
@@ -227,17 +269,16 @@ id:{nav1:"Keunggulan",nav2:"Cara kerja",dl:"Unduh",dl2:"⬇ Unduh untuk Windows"
  s3t:"Pakai",s3d:"Ketik tugas di baris kosong lalu tekan Enter. Klik lingkaran untuk menyelesaikan, klik dua kali teks untuk mengedit.",
  k1:"Merah",k1d:"tutup",k2:"Kuning",k2d:"minimize",k3:"Hijau",k3d:"selalu di atas",k4:"ganti hari",
  g_t:"Tampilan",g_l:"Mengikuti tema terang maupun gelap di Windows kamu.",g1:"Mode terang",g2:"Mode gelap",
- c_t:"Siap merapikan harimu?",c_l:"Gratis, ringan, dan tanpa akun.",
- warn:"Jika Windows menampilkan “Windows protected your PC”, klik More info → Run anyway. Aplikasi ini belum memiliki tanda tangan digital berbayar.",
- foot:"Dibuat oleh Galih dan tim."},
+ dl_s:"⬇ Unduh Installer",dl_p:"⬇ Unduh Portable",ds_s:"Pilih folder instalasi dan opsi jalan otomatis saat Windows menyala.",ds_p:"Tanpa instalasi, langsung jalan. Cocok untuk flashdisk.",c_t:"Siap merapikan harimu?",c_l:"Gratis, ringan, dan tanpa akun.",
+  foot:"Made by Galih and the team @2026"},
 en:{nav1:"Features",nav2:"How it works",dl:"Download",dl2:"⬇ Download for Windows",pill:"Free · Windows 10 / 11",
  h1:"A to-do list you can <em>see through</em>, as pretty as glass.",
  sub:"A lightweight desktop widget with an iOS-style frosted glass effect. Jot down your daily tasks, pick a date, and keep your wallpaper in view.",
- how:"See how it works",note:"An installer is available on the Download page.",
- d_t:"Smooth animations",d_l:"Checkmarks spring and draw themselves, rows slide away when deleted.",a1:"Adding tasks…",a2:"Checking tasks ✓",a3:"Deleting tasks ✕",vis:"visitors",f_t:"Why Glass Todo?",f_l:"Simple, beautiful, and easy on your computer.",
+ how:"See how it works",
+ d_t:"Smooth animations",d_l:"Checkmarks spring and draw themselves, rows slide away when deleted.",a1:"Adding tasks…",a2:"Checking tasks ✓",a3:"Deleting tasks ✕",vis:"visitors",sc1:"Add tasks",sc2:"Priority & category",sc3:"Drag to reorder",sc4:"Progress calendar",sc5:"Check off",sc6:"Delete",cp1:"Type a task and press Enter — the new row slides in.",cp2:"Give each task a priority (color bar) and a category (label).",cp3:"Press, hold and drag a task to change the order.",cp4:"Open the monthly calendar: the dot under each date shows that day’s progress.",cp5:"Check tasks off — the dot turns red → yellow → green.",cp6:"Delete tasks with a smooth slide-away animation.",f_t:"Why Glass Todo?",f_l:"Simple, beautiful, and easy on your computer.",
  f1t:"Frosted glass blur",f1d:"The window blurs the wallpaper behind it, just like an iOS widget. Best on Windows 11.",
  f2t:"Lightweight",f2d:"A small installer file that stays light on memory while running: CPU {cpu} & memory {ram}.",
- f3t:"Lists by date",f3d:"Step through days or pick a date; every day has its own list with a done counter.",
+ f3t:"Calendar & progress",f3d:"Pick a date on the monthly calendar; red, yellow, or green dots show each day’s progress.",f7t:"Drag to reorder",f7d:"Rearrange tasks with smooth drag and drop.",f8t:"Categories & priority",f8d:"Tag every task with a category and a colored priority.",
  f4t:"Smooth animations",f4d:"Springy checkmarks, tasks that slide in, and macOS-style window buttons. Lively without being over the top.",
  f5t:"Private & offline",f5d:"No account, no internet. Your tasks stay on your computer only.",
  f6t:"Auto light & dark",f6d:"Colors follow your Windows theme, and you can pin the window to stay on top of other apps.",
@@ -247,9 +288,8 @@ en:{nav1:"Features",nav2:"How it works",dl:"Download",dl2:"⬇ Download for Wind
  s3t:"Use",s3d:"Type a task in the empty row and press Enter. Click the circle to complete it, double-click the text to edit.",
  k1:"Red",k1d:"close",k2:"Yellow",k2d:"minimize",k3:"Green",k3d:"keep on top",k4:"change day",
  g_t:"Screenshots",g_l:"Follows your Windows light or dark theme.",g1:"Light mode",g2:"Dark mode",
- c_t:"Ready to tidy up your day?",c_l:"Free, lightweight, no account needed.",
- warn:"If Windows shows “Windows protected your PC”, click More info → Run anyway. The app doesn’t have a paid code-signing certificate.",
- foot:"Made by Galih and the team."}
+ dl_s:"⬇ Download Installer",dl_p:"⬇ Download Portable",ds_s:"Choose the install folder and whether it starts with Windows.",ds_p:"No installation, just run it. Great for a USB stick.",c_t:"Ready to tidy up your day?",c_l:"Free, lightweight, no account needed.",
+  foot:"Made by Galih and the team @2026"}
 };
 var lang='id';
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
@@ -263,44 +303,78 @@ function setLang(l){
 }
 document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){setLang(b.dataset.lang)}});
 document.querySelectorAll('[data-shot]').forEach(function(i){i.src=IMG[i.dataset.shot]});
-// var rel="https://github.com/"+REPO+"/releases/latest";
-// document.querySelectorAll('.dl').forEach(function(a){a.href=rel});
-// document.querySelector('.repo').href="https://github.com/"+REPO;
+var rel="https://github.com/"+REPO+"/releases/latest";
+document.getElementById('dlSetup').href=rel+"/download/"+FILE_SETUP;
+document.getElementById('dlPortable').href=rel+"/download/"+FILE_PORTABLE;
 
-/* ---------- automatic animation loop (no interaction) ---------- */
+/* ---------- hero: automatic feature walkthrough (no interaction) ---------- */
 var DEMO={id:["Desain to-do list","Kirim pesan ke Aloy","Review laporan mingguan","Olahraga sore"],en:["Design todo list","Send message to Aloy","Review weekly report","Evening workout"]};
+var CAT={work:['Work','#6e7bff'],personal:['Personal','#c77dff'],study:['Study','#30d5c8'],health:['Health','#ff6b9a']};
 var dS=[],dN=0,CK='<svg viewBox="0 0 24 24"><path pathLength="1" d="M5.5 12.8l4.4 4.4 8.8-10.2"/></svg>',XI='<svg viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg>',last='',apT=[],onScreen=false;
+function at(ms,fn){apT.push(setTimeout(fn,ms))}
+function dStop(){apT.forEach(clearTimeout);apT=[]}
+function dFind(id){return dS.filter(function(o){return o.id===id})[0]}
+function dRow(id){return document.querySelector('#dlist .r[data-id="'+id+'"]')}
 function dCount(){var e=document.getElementById('dc'),v=dS.filter(function(x){return x.d}).length+'/'+dS.length;e.textContent=v;if(v!==last){e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')}last=v}
-function dCap(k){document.getElementById('cap').textContent=k?T[lang][k]:'\u00a0'}
+function dDot(){var c=document.querySelector('#mg .md.sel');if(!c)return;var d=c.querySelector('.dt'),n=dS.length,k=dS.filter(function(x){return x.d}).length,s=!n?'':k===n?'g':k/n>=.5?'y':'r';
+  if(!s){if(d)d.remove();return}if(!d){d=document.createElement('i');c.appendChild(d)}d.className='dt '+s;void d.offsetWidth;d.classList.add('bump')}
+function dChip(t,k,anim){var c=document.createElement('span');c.className='chip'+(anim?' pop-in':'');c.style.setProperty('--c',CAT[k][1]);c.innerHTML='<i></i>';c.append(CAT[k][0]);t.insertBefore(c,t.querySelector('.x'))}
 function dRender(enter){
   var ul=document.getElementById('dlist');ul.innerHTML='';
   dS.forEach(function(x){
     var li=document.createElement('li');li.className='r'+(x.id===enter?' in':'');li.dataset.id=x.id;
-    li.innerHTML='<div class="c'+(x.d?' done':'')+'">'+CK+'</div><div class="t'+(x.d?' done':'')+'"><span></span><div class="x">'+XI+'</div></div>';
-    li.querySelector('span').textContent=x.t;ul.appendChild(li)});
+    li.innerHTML='<div class="c'+(x.d?' done':'')+'">'+CK+'</div><div class="t'+(x.d?' done':'')+(x.p?' p'+x.p:'')+'"><span></span><div class="x">'+XI+'</div></div>';
+    var t=li.querySelector('.t');t.querySelector('span').textContent=x.t;if(x.k)dChip(t,x.k,false);ul.appendChild(li)});
   for(var i=0;i<Math.max(5-dS.length,0);i++){var p=document.createElement('li');p.className='r';p.innerHTML='<div class="c"></div><div class="t"></div>';ul.appendChild(p)}
 }
-function dRow(id){return document.querySelector('#dlist .r[data-id="'+id+'"]')}
-function dToggle(id){var x=dS.filter(function(o){return o.id===id})[0],r=dRow(id);if(!x||!r)return;x.d=!x.d;
-  var c=r.querySelector('.c'),t=r.querySelector('.t');c.classList.toggle('done',x.d);t.classList.toggle('done',x.d);
-  c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');dCount()}
-function dHover(id){var r=dRow(id);if(r)r.querySelector('.t').classList.add('hov')}
-function dDel(id){var r=dRow(id);if(!r)return;r.classList.add('out');
-  setTimeout(function(){dS=dS.filter(function(o){return o.id!==id});dRender();dCount()},250)}
-function dStop(){apT.forEach(clearTimeout);apT=[]}
-function at(ms,fn){apT.push(setTimeout(fn,ms))}
-function dRun(){
-  dStop();dS=[];last='';dRender();dCount();dCap('a1');
-  var ids=DEMO[lang].map(function(){return ++dN}),i;
-  ids.forEach(function(id,k){at(400+k*500,function(){var o={id:id,t:DEMO[lang][k],d:false};dS.push(o);dRender(id);dCount()})});
-  at(2500,function(){dCap('a2')});
-  ids.forEach(function(id,k){at(2800+k*600,function(){dToggle(id)})});
-  at(5500,function(){dCap('a3')});
-  ids.forEach(function(id,k){at(5800+k*800,function(){dHover(id)});at(6200+k*800,function(){dDel(id)})});
-  at(9800,dRun);                       // loop forever
+function buildCal(){
+  var n=new Date(),y=n.getFullYear(),m=n.getMonth(),off=(new Date(y,m,1).getDay()+6)%7,ti=off+n.getDate()-1,loc=lang==='id'?'id-ID':'en-US';
+  document.getElementById('mt').textContent=new Date(y,m,1).toLocaleDateString(loc,{month:'long',year:'numeric'});
+  document.getElementById('mw').innerHTML=(lang==='id'?'SSRKJSM':'MTWTFSS').split('').map(function(c){return'<span>'+c+'</span>'}).join('');
+  var sample={'-6':'g','-4':'y','-3':'g','-1':'r','2':'r','4':'y','7':'g'},g=document.getElementById('mg'),h='';
+  for(var i=0;i<42;i++){var d=new Date(y,m,1-off+i),o=i-ti;
+    h+='<div class="md'+(d.getMonth()!==m?' out':'')+(i===ti?' sel':'')+'">'+d.getDate()+(sample[o]?'<i class="dt '+sample[o]+'"></i>':'')+'</div>'}
+  g.innerHTML=h;
 }
-function dInit(){dStop();dS=[];last='';dRender();dCount();dCap(null);if(onScreen)dRun()}
-if('IntersectionObserver' in window){new IntersectionObserver(function(en){onScreen=en[0].isIntersecting;if(onScreen)dRun();else dStop()},{threshold:.4}).observe(document.getElementById('dw'))}
+function dStep(i){document.querySelectorAll('#feats span').forEach(function(s,k){s.classList.toggle('on',k===i)});
+  var c=document.getElementById('cap');c.textContent=i<0?'\u00a0':T[lang]['cp'+(i+1)]}
+function dToggle(id){var x=dFind(id),r=dRow(id);if(!x||!r)return;x.d=!x.d;var c=r.querySelector('.c'),t=r.querySelector('.t');
+  c.classList.toggle('done',x.d);t.classList.toggle('done',x.d);c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');dCount();dDot()}
+function dPri(id,p){var x=dFind(id),r=dRow(id);if(!x||!r)return;x.p=p;var t=r.querySelector('.t');t.classList.remove('p1','p2','p3');void t.offsetWidth;t.classList.add('p'+p)}
+function dCat(id,k){var x=dFind(id),r=dRow(id);if(!x||!r)return;x.k=k;dChip(r.querySelector('.t'),k,true)}
+function dHover(id){var r=dRow(id);if(r)r.querySelector('.t').classList.add('hov')}
+function dDel(id){var r=dRow(id);if(!r)return;r.classList.add('out');setTimeout(function(){dS=dS.filter(function(o){return o.id!==id});dRender();dCount();dDot()},250)}
+function dDrag(id,to){
+  var from=dS.indexOf(dFind(id)),rows=[].slice.call(document.querySelectorAll('#dlist .r[data-id]')),li=rows[from];if(!li)return;
+  li.classList.add('lifted');
+  rows.forEach(function(r,i){if(i===from)return;var s=0;if(from<to&&i>from&&i<=to)s=-52;else if(from>to&&i>=to&&i<from)s=52;
+    r.style.transition='transform .45s cubic-bezier(.22,1,.36,1)';r.style.transform=s?'translateY('+s+'px)':''});
+  li.style.transition='transform .6s cubic-bezier(.22,1,.36,1)';li.style.transform='translateY('+((to-from)*52)+'px) scale(1.03)';
+  at(900,function(){li.classList.remove('lifted');li.style.transform='translateY('+((to-from)*52)+'px)'});
+  at(1250,function(){dS.splice(to,0,dS.splice(from,1)[0]);dRender()});
+}
+function dRun(){
+  dStop();dS=[];last='';document.getElementById('dw').classList.remove('cal');buildCal();dRender();dCount();
+  var ids=DEMO[lang].map(function(){return++dN}),T0=0;
+  dStep(0);
+  ids.forEach(function(id,k){at(500+k*550,function(){dS.push({id:id,t:DEMO[lang][k],d:false,p:0,k:null});dRender(id);dCount()})});
+  at(2900,function(){dStep(1)});                                                       // priority + category
+  [[0,3,'work'],[1,2,'personal'],[2,1,'study'],[3,0,'health']].forEach(function(a,k){
+    if(a[1])at(3200+k*750,function(){dPri(ids[a[0]],a[1])});at(3500+k*750,function(){dCat(ids[a[0]],a[2])})});
+  at(6500,function(){dStep(2)});                                                       // drag to reorder
+  at(6900,function(){dDrag(ids[3],1)});
+  at(8700,function(){dStep(3);document.getElementById('dw').classList.add('cal');setTimeout(dDot,350)});   // calendar
+  at(10300,function(){dStep(4)});                                                      // check off
+  ids.forEach(function(id,k){at(10700+k*800,function(){dToggle(id)})});
+  at(14200,function(){dStep(5);document.getElementById('dw').classList.remove('cal')});  // delete
+  ids.forEach(function(id,k){at(14900+k*750,function(){dHover(id)});at(15300+k*750,function(){dDel(id)})});
+  at(19000,dRun);                                                                      // loop
+}
+function dInit(){dStop();dS=[];last='';document.getElementById('dw').classList.remove('cal');buildCal();dRender();dCount();dStep(-1);if(onScreen)dRun()}
+function fitDemo(){var f=document.getElementById('fit'),w=document.getElementById('dw'),av=f.parentNode.clientWidth-44,s=Math.min(1,av/640);
+  f.style.width=(640*s)+'px';f.style.height=(304*s)+'px';w.style.transform='scale('+s+')'}
+window.addEventListener('resize',fitDemo);fitDemo();
+if('IntersectionObserver' in window){new IntersectionObserver(function(en){onScreen=en[0].isIntersecting;if(onScreen)dRun();else dStop()},{threshold:.3}).observe(document.getElementById('fit'))}
 else{onScreen=true}
 
 /* ---------- visitor counter (GoatCounter) ---------- */

@@ -492,8 +492,9 @@ function setLang(l){
 document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){setLang(b.dataset.lang)}});
 document.querySelectorAll('[data-shot]').forEach(function(i){i.src=IMG[i.dataset.shot]});
 var rel="https://github.com/"+REPO+"/releases/latest";
-document.getElementById('dlSetup').href=rel+"/download/"+FILE_SETUP;
-document.getElementById('dlPortable').href=rel+"/download/"+FILE_PORTABLE;
+var a1=document.getElementById('dlSetup'),a2=document.getElementById('dlPortable');
+if(a1.getAttribute('href')==='#')a1.href=rel+"/download/"+FILE_SETUP;
+if(a2.getAttribute('href')==='#')a2.href=rel+"/download/"+FILE_PORTABLE;
 
 /* ---------- hero: automatic feature walkthrough (no interaction) ---------- */
 var DEMO={id:["Desain to-do list","Kirim pesan ke Aloy","Review laporan mingguan","Olahraga sore"],en:["Design todo list","Send message to Aloy","Review weekly report","Evening workout"]};
